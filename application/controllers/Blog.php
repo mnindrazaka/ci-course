@@ -14,14 +14,16 @@ class Blog extends MY_Controller {
     }
 
 	public function create() {
-        $this->view('blog.create');
+        $data['kategori'] = KategoriModel::all();
+        $this->view('blog.create', $data);
     }
 
     public function store() {
         $this->validate($this->input->post(), [
             'penulis' => 'required|string',
             'judul' => 'required|string',
-            'isi' => 'required|string'
+            'isi' => 'required|string',
+            'id_kategori' => 'required|integer'
         ]);
         $_POST['file'] = $this->do_upload('file', 'assets/upload/blog', 'image', TRUE);
 
@@ -30,6 +32,7 @@ class Blog extends MY_Controller {
     }
 
     public function edit($id) {
+        $data['kategori'] = KategoriModel::all();
         $data['blog'] = BlogModel::find($id);
         $this->view('blog.edit', $data);
     }
@@ -38,7 +41,8 @@ class Blog extends MY_Controller {
         $this->validate($this->input->post(), [
             'penulis' => 'required|string',
             'judul' => 'required|string',
-            'isi' => 'required|string'
+            'isi' => 'required|string',
+            'id_kategori' => 'required|integer'
         ]);
 
         if(!empty($_FILES['file']['name'])){

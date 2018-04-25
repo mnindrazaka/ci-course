@@ -12,19 +12,19 @@
                 <div class="mb-2">
                     <div class="row">
                         <div class="col-md-12">
-                            <h3 class="mb-0 float-left">{{ $value->judul }}</h3>
+                            <p class="mb-0"><small class="text-muted">{{ $value->kategori->nama }}</small></p>
+                            <h3 class="mt-0 mb-0 float-left">{{ $value->judul }}</h3>
 
                             <div class="btn-group float-right">
                                 <a class="btn btn-warning" href="{{ base_url('blog/edit/' . $value->id) }}">Ubah</a>
                                 <a class="btn btn-danger" href="{{ base_url('blog/delete/' . $value->id) }}">Hapus</a>
                             </div>
-
                         </div>
                     </div>
                     <small class="text-muted">Ditulis oleh <b>{{ $value->penulis }}</b> pada <b>{{ date('d-m-Y', strtotime($value->tanggal)) }}</b></small>
                 </div>
 
-                <p class="text-muted">{{ strip_tags($value->isi) }}</p>
+                <p class="mt-3 text-muted">{{ strip_tags($value->isi) }}</p>
 
                 <a class="btn btn-success" href="{{ base_url('blog/show/' . $value->id) }}">Selengkapnya</a>
             </div>

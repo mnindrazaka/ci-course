@@ -11,6 +11,21 @@
         </div>
 
         <div class="form-group">
+            <label for="id_kategori">Kategori</label>
+            <select class="custom-select" name="id_kategori" id="id_kategori">
+                <option selected value="">Pilih kategori</option>
+                @foreach($kategori as $row)
+                    <option value="{{ $row->id }}" {{ $row->id == old('id_kategori', $blog->id_kategori) ? 'selected':'' }}>
+                        {{ $row->nama }}
+                    </option>
+                @endforeach
+            </select>
+            @if($errors->has('id_kategori'))
+                <small class="text-danger">{{ $errors->first('id_kategori') }}</small>
+            @endif
+        </div>
+
+        <div class="form-group">
             <label for="penulis">Penulis</label>
             <input type="text" name="penulis" id="penulis" class="form-control" placeholder="Masukkan Penulis" value="{{ old('penulis', $blog->penulis) }}">
             @if($errors->has('penulis'))
