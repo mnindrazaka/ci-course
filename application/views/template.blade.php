@@ -41,6 +41,10 @@
           </li>
 
           <li class="nav-item">
+            <a class="nav-link" href="{{ base_url('kategori') }}">Kategori <span class="sr-only">(current)</span></a>
+          </li>
+
+          <li class="nav-item">
             <a class="nav-link" href="{{ base_url('blog') }}">Blog <span class="sr-only">(current)</span></a>
           </li>
 
