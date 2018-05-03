@@ -31,4 +31,5 @@
         </div>
         <hr>
     @endforeach
+    {!! $pagination !!}
 @endsection

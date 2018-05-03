@@ -3,9 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Blog extends MY_Controller {
 
-    public function index() {
-	    $data['blog'] = BlogModel::all();
-		$this->view('blog.index', $data);
+    public function index($offset = 0) {
+        $data['pagination'] = $this->paginate(BlogModel::all(), 2, base_url('blog/index'));
+		$data['blog'] = BlogModel::offset($offset)->limit(2)->get();
+        $this->view('blog.index', $data);
 	}
 
 	public function show($id) {
