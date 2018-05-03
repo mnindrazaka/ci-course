@@ -2,6 +2,7 @@
 
 @section('content')
     <a class="btn btn-primary" href="{{ base_url('blog/create') }}">Tulis artikel baru</a>
+    <a class="btn btn-success" href="{{ base_url('blog/indexTable') }}">Tampilan Table</a>
     <hr>
     @foreach($blog as $value)
         <div class="row mt-3 mb-3">

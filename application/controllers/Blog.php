@@ -9,6 +9,16 @@ class Blog extends MY_Controller {
         $this->view('blog.index', $data);
 	}
 
+	public function indexTable() {
+        $data['blog'] = BlogModel::all();
+        $this->view('blog.indexTable', $data);
+    }
+
+    public function getAll() {
+        $data['data'] = BlogModel::with('kategori')->get();
+        echo json_encode($data);
+    }
+
 	public function show($id) {
         $data['blog'] = BlogModel::find($id);
         $this->view('blog.show', $data);
