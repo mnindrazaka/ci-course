@@ -6,8 +6,8 @@
     <br><br>
 
     <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-            <thead class="thead-inverse|thead-default">
+        <table class="table table-striped table-bordered" id="myTable">
+            <thead class="thead-default">
             <tr>
                 <th>No</th>
                 <th>NIM</th>
@@ -16,23 +16,35 @@
                 <th>Aksi</th>
             </tr>
             </thead>
-            <tbody>
-            @foreach($biodata as $key => $value)
-                <tr>
-                    <td>{{ $key + 1 }}</td>
-                    <td>{{ $value->nim }}</td>
-                    <td>{{ $value->nama }}</td>
-                    <td>{{ $value->alamat }}</td>
-                    <td>
-                        <div class="btn-group">
-                            <button type="button" onclick="window.location='{{ base_url('biodata/show/' . $value->id)  }}'" class="btn btn-primary">Detail</button>
-                            <button type="button" onclick="window.location='{{ base_url('biodata/edit/' . $value->id)  }}'" class="btn btn-warning">Ubah</button>
-                            <button type="button" onclick="window.location='{{ base_url('biodata/delete/' . $value->id)  }}'" class="btn btn-danger">Hapus</button>
-                        </div>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
         </table>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#myTable').dataTable( {
+                "columns": [
+                    { "data": "id" },
+                    { "data": "nim" },
+                    { "data": "nama" },
+                    { "data": "alamat" },
+                    {
+                        "data": null,
+                        "render": function (data) {
+                            return `
+                            <div class="btn-group">
+                                <a type="a" href="{{ base_url('biodata/show/') }}${data.id}" class="btn btn-primary">Detail</a>
+                                <a type="a" href="{{ base_url('biodata/edit/') }}${data.id}" class="btn btn-warning">Ubah</a>
+                                <a type="a" href="{{ base_url('biodata/delete/')}}${data.id}" class="btn btn-danger">Hapus</a>
+                            </div>`
+                        }
+                    }
+                ],
+                "ajax": {
+                    "url": "{{ base_url('biodata/getAll')  }}"
+                }
+            } );
+        });
+    </script>
 @endsection

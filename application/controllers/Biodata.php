@@ -5,9 +5,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Biodata extends MY_Controller {
 
     public function index() {
-	    $data['biodata'] = BiodataModel::all();
-		$this->view('biodata.index', $data);
+		$this->view('biodata.index');
 	}
+
+	public function getAll() {
+        $data['data'] = BiodataModel::all();
+        echo json_encode($data);
+    }
 
 	public function show($id) {
         $data['biodata_array'] = json_decode(json_encode(BiodataModel::find($id)),TRUE);
