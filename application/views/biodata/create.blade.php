@@ -26,6 +26,19 @@
             @endif
         </div>
 
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" class="form-control" placeholder="Masukkan Password">
+            @if($errors->has('password'))
+                <p class="text-danger">{{ $errors->first('password') }}</p>
+            @endif
+        </div>
+
+        <div class="form-group">
+            <label for="password_confirmation">Konfirmasi Password</label>
+            <input type="password" name="password_confirmation" class="form-control" placeholder="Masukkan Password Kembali">
+        </div>
+
         <button type="submit" class="btn btn-success">Simpan</button>
     </form>
 @endsection

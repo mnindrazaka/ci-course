@@ -134,4 +134,16 @@ class MY_Controller extends CI_Controller {
         $this->pagination->initialize($config);
         return $this->pagination->create_links();
     }
+
+    protected function authenticate() {
+        if(is_null($this->session->userdata('biodata'))) {
+            redirect(base_url('login'));
+        }
+    }
+
+    protected function redirectIfAuthenticated() {
+        if(!is_null($this->session->userdata('biodata'))) {
+            redirect(base_url());
+        }
+    }
 }

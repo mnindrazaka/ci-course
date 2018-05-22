@@ -4,6 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Biodata extends MY_Controller {
 
+    public function __construct() {
+        parent::__construct();
+        $this->authenticate();
+    }
+
     public function index() {
 		$this->view('biodata.index');
 	}
@@ -30,9 +35,11 @@ class Biodata extends MY_Controller {
         $this->validate($this->input->post(), [
             'nim' => 'required|integer|unique:biodata',
             'nama' => 'required|string',
-            'alamat' => 'required|string'
+            'alamat' => 'required|string',
+            'password' => 'required|confirmed'
         ]);
 
+        $_POST['password'] = md5($_POST['password']);
         BiodataModel::create($this->input->post());
         redirect(base_url('biodata'), 'refresh');
     }

@@ -5,5 +5,5 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class BiodataModel extends Eloquent {
     protected $table = "biodata";
     public $timestamps = false;
-    protected $fillable = ["nama", "alamat", "nim"];
+    protected $fillable = ["nama", "alamat", "nim", "password"];
 }

@@ -9,7 +9,6 @@
         <table class="table table-striped table-bordered" id="myTable">
             <thead class="thead-default">
             <tr>
-                <th>No</th>
                 <th>NIM</th>
                 <th>Nama</th>
                 <th>Alamat</th>
@@ -25,7 +24,6 @@
         $(document).ready(function() {
             $('#myTable').dataTable( {
                 "columns": [
-                    { "data": "id" },
                     { "data": "nim" },
                     { "data": "nama" },
                     { "data": "alamat" },
