@@ -16,7 +16,7 @@ class Login extends MY_Controller {
             'password' => 'required|string'
         ]);
 
-        $biodata = BiodataModel::where([
+        $biodata = BiodataModel::with('level.akses.modul')->where([
             'nim' => $this->input->post('nim')
         ])->first();
 
@@ -33,7 +33,6 @@ class Login extends MY_Controller {
     }
 
     public function logout_process() {
-        $this->authenticate();
         unset($_SESSION['biodata']);
         redirect(base_url());
     }

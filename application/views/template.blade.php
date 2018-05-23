@@ -38,25 +38,11 @@
             <a class="nav-link" href="{{ base_url() }}">Beranda <span class="sr-only">(current)</span></a>
           </li>
 
+          @foreach($_SESSION['biodata']->level->akses as $row)
           <li class="nav-item">
-            <a class="nav-link" href="{{ base_url('biodata') }}">Biodata <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{{ base_url($row->modul->nama) }}">{{ $row->modul->label }} <span class="sr-only">(current)</span></a>
           </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="{{ base_url('level') }}">Level <span class="sr-only">(current)</span></a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="{{ base_url('kategori') }}">Kategori <span class="sr-only">(current)</span></a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="{{ base_url('blog') }}">Blog <span class="sr-only">(current)</span></a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="{{ base_url('tentang') }}">Tentang <span class="sr-only">(current)</span></a>
-          </li>
+          @endforeach
 
           <li class="nav-item">
             <a class="nav-link" href="{{ base_url('login/logout_process') }}">Logout <span class="sr-only">(current)</span></a>

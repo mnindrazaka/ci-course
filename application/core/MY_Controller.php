@@ -138,6 +138,17 @@ class MY_Controller extends CI_Controller {
     protected function authenticate() {
         if(is_null($this->session->userdata('biodata'))) {
             redirect(base_url('login'));
+        } else if (get_class($this) != 'Beranda' && get_class($this) != 'Login') {
+            $found = false;
+            foreach ($this->session->userdata('biodata')->level->akses as $row) {
+                if ($row->modul->nama == get_class($this)) {
+                    $found = true;
+                }
+            }
+
+            if (!$found) {
+                redirect(base_url());
+            }
         }
     }
 

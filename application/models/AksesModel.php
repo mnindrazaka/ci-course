@@ -6,4 +6,8 @@ class AksesModel extends Eloquent {
     protected $table = "akses";
     public $timestamps = false;
     protected $fillable = ["id_modul", "id_level"];
+
+    public function modul() {
+        return $this->belongsTo('ModulModel', 'id_modul', 'id');
+    }
 }
