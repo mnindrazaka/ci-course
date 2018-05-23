@@ -10,6 +10,18 @@
             @endif
         </div>
 
+        <div class="form-group">
+            <p>Dapat Mengakses Halaman : </p>
+            @foreach($modul as $row)
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" name="id_modul[]" value="{{ $row->id }}" class="custom-control-input" id="{{ $row->id }}">
+                    <label class="custom-control-label" for="{{ $row->id }}">{{ $row->label }}</label>
+                </div>
+            @endforeach
+        </div>
+
+
+
         <button type="submit" class="btn btn-success">Simpan</button>
     </form>
 @endsection

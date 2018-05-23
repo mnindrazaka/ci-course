@@ -11,23 +11,39 @@ class Level extends MY_Controller {
 
     public function index() {
         $data['level'] = LevelModel::all();
-		$this->view('level.index', $data);
-	}
+        $this->view('level.index', $data);
+    }
 
-	public function create() {
-        $this->view('level.create');
+    public function create() {
+        $data['modul'] = ModulModel::all();
+        $this->view('level.create', $data);
     }
 
     public function store() {
         $this->validate($this->input->post(), [
             'nama' => 'required|string'
         ]);
-        LevelModel::create($this->input->post());
+        $level = LevelModel::create($this->input->post());
+
+        // insert akses
+        foreach ($this->input->post('id_modul') as $row) {
+            AksesModel::create([
+                'id_level' => $level->id,
+                'id_modul' => $row
+            ]);
+        }
+
         redirect(base_url('level'), 'refresh');
     }
 
     public function edit($id) {
         $data['level'] = LevelModel::find($id);
+        $data['modul'] = ModulModel::all();
+
+        $data['level_akses'] = array_map(function ($item) {
+            return $item['id_modul'];
+        }, $data['level']->akses->toArray());
+
         $this->view('level.edit', $data);
     }
 
@@ -35,8 +51,16 @@ class Level extends MY_Controller {
         $this->validate($this->input->post(), [
             'nama' => 'required|string'
         ]);
-
         LevelModel::find($id)->update($this->input->post());
+
+        // update akses
+        AksesModel::where('id_level', $id)->delete();
+        foreach ($this->input->post('id_modul') as $row) {
+            AksesModel::create([
+                'id_level' => $id,
+                'id_modul' => $row
+            ]);
+        }
         redirect(base_url('level'), 'refresh');
     }
 
