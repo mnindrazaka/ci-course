@@ -12,6 +12,7 @@
                 <th>NIM</th>
                 <th>Nama</th>
                 <th>Alamat</th>
+                <th>Level</th>
                 <th>Aksi</th>
             </tr>
             </thead>
@@ -27,6 +28,7 @@
                     { "data": "nim" },
                     { "data": "nama" },
                     { "data": "alamat" },
+                    { "data": "level.nama" },
                     {
                         "data": null,
                         "render": function (data) {

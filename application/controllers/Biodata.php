@@ -14,7 +14,7 @@ class Biodata extends MY_Controller {
 	}
 
 	public function getAll() {
-        $data['data'] = BiodataModel::all();
+        $data['data'] = BiodataModel::with('level')->get();
         echo json_encode($data);
     }
 
@@ -28,15 +28,17 @@ class Biodata extends MY_Controller {
     }
 
 	public function create() {
-        $this->view('biodata.create');
+        $data['level'] = LevelModel::all();
+        $this->view('biodata.create', $data);
     }
 
     public function store() {
         $this->validate($this->input->post(), [
-            'nim' => 'required|integer|unique:biodata',
+            'nim' => 'required|numeric|unique:biodata',
             'nama' => 'required|string',
             'alamat' => 'required|string',
-            'password' => 'required|confirmed'
+            'password' => 'required|confirmed',
+            'id_level' => 'required|integer'
         ]);
 
         $_POST['password'] = md5($_POST['password']);
@@ -46,14 +48,15 @@ class Biodata extends MY_Controller {
 
     public function edit($id) {
         $data['biodata'] = BiodataModel::find($id);
+        $data['level'] = LevelModel::all();
         $this->view('biodata.edit', $data);
     }
 
     public function update($id) {
         $this->validate($this->input->post(), [
-            'nim' => 'required|integer',
             'nama' => 'required|string',
-            'alamat' => 'required|string'
+            'alamat' => 'required|string',
+            'id_level' => 'required|integer'
         ]);
 
         BiodataModel::find($id)->update($this->input->post());
